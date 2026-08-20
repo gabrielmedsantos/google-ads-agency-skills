@@ -16,6 +16,12 @@ from pathlib import Path
 
 from google_auth_oauthlib.flow import InstalledAppFlow
 
+# Console do Windows costuma vir em cp1252, que não sabe imprimir emoji — sem isso,
+# o script quebra com UnicodeEncodeError bem depois de já ter salvo o token no .env.
+for _stream in (sys.stdout, sys.stderr):
+    if hasattr(_stream, "reconfigure"):
+        _stream.reconfigure(encoding="utf-8", errors="replace")
+
 SCOPES = ["https://www.googleapis.com/auth/adwords"]
 ENV_PATH = Path(__file__).resolve().parent.parent / ".env"
 REDIRECT_PORT = 8765  # cadastra http://localhost:8765/ no OAuth client (tipo Web)
