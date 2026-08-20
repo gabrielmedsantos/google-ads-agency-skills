@@ -1,0 +1,29 @@
+# Credenciais — NUNCA commitar
+.env
+.env.*
+!.env.example
+*.token
+*.refresh
+mcp/credentials/
+
+# Exports brutos do Google Ads — dado de cliente, não versiona
+**/exports/*.csv
+**/exports/*.xlsx
+
+# Espelhos/backups operacionais de hosting de cliente
+**/_hosting-mirror/
+**/_hosting-backup/
+
+# Versões descartadas / referência local
+**/_descartado/
+
+# Dependências (se algum client folder tiver scripts próprios)
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
