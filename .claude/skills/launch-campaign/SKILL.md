@@ -105,7 +105,9 @@ Produzir dois artefatos em `<Cliente>/campanhas/`:
 
 ## Passo 9 — Apply
 
-**Com MCP conectado:** aplicar as mutations (criar campanha → ad groups → keywords → ads → extensions → negativas) uma etapa por vez, sempre com a campanha nascendo `PAUSED`. Confirmar com o usuário antes de qualquer chamada de mutation (regra global).
+**Com MCP conectado (`mcp/server.py`, ver `mcp/README.md`):** a tool `create_search_campaign` faz budget + campanha + geo + idioma + ad group(s) + keywords + RSA numa chamada composta, sempre nascendo `PAUSED`. Resolver geo/idioma antes com `find_geo_target` / `list_languages`, e a fase de escolha de keyword pode usar `research_keywords` (Keyword Planner — volume real, competição, faixa de CPC) em vez de intuição. Negativas entram via `add_negative_keyword` (nível ad_group/campaign — nível account/lista compartilhada ainda é manual). Sitelinks/callouts/structured snippets via `add_sitelinks`/`add_callouts`/`add_structured_snippet`. Editar depois de criada: `add_positive_keyword`, `update_keyword_bid`, `set_keyword_status`, `set_ad_group_status`. Tudo testado ponta a ponta contra conta real (criação + edição + remoção de teste, ver `mcp/README.md`). Confirmar com o usuário antes de qualquer chamada de mutation (regra global) — toda tool já exige `approval` explícito por design.
+
+Pra campanha **Performance Max** (fora do escopo Search desta skill), a tool `create_pmax_campaign` no MCP cria budget + campanha + geo + idioma + asset group + assets de texto e imagem numa chamada composta — ver `mcp/README.md` pros parâmetros e limitações (precisa de 3 imagens reais: marketing image 1.91:1, square 1:1, logo 1:1).
 
 **Sem MCP — Google Ads Editor (bulk import via CSV):**
 

@@ -19,6 +19,8 @@ mcp/credentials/
 
 # Dependências (se algum client folder tiver scripts próprios)
 node_modules/
+__pycache__/
+*.pyc
 
 # OS
 .DS_Store
